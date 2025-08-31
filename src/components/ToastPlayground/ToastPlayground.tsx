@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import Button from "../Button";
-
+import Toast from "../Toast/Toast";
 import styles from "./ToastPlayground.module.css";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
@@ -9,6 +9,9 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 function ToastPlayground() {
   const [message, setMessage] = useState("");
   const [variant, setVariant] = useState(VARIANT_OPTIONS[0]);
+  const [showToast, setShowToast] = useState(true);
+
+  const dismissToast = () => {};
 
   return (
     <div className={styles.wrapper}>
@@ -16,6 +19,10 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
+
+      {/* {showToast && ( */}
+      <Toast message={message} variant={variant} dismissToast={dismissToast} />
+      {/* )} */}
 
       <div className={styles.controlsWrapper}>
         <form
@@ -57,8 +64,6 @@ function ToastPlayground() {
                 {option}
               </label>
             ))}
-
-            {/* TODO Other Variant radio buttons here */}
           </div>
         </div>
 
