@@ -4,7 +4,7 @@ import Button from "../Button";
 import Toast from "../Toast/Toast";
 import styles from "./ToastPlayground.module.css";
 
-type VariantType = "notice" | "warning" | "success" | "error";
+export type VariantType = "notice" | "warning" | "success" | "error";
 const VARIANT_OPTIONS: VariantType[] = [
   "notice",
   "warning",
