@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import Button from "../Button";
-import Toast from "../Toast/Toast";
 import styles from "./ToastPlayground.module.css";
 import ToastShelf from "../ToastShelf/ToastShelf";
 import { ToastProps } from "../Toast/Toast";
