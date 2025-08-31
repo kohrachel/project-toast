@@ -4,11 +4,17 @@ import Button from "../Button";
 import Toast from "../Toast/Toast";
 import styles from "./ToastPlayground.module.css";
 
-const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
+type VariantType = "notice" | "warning" | "success" | "error";
+const VARIANT_OPTIONS: VariantType[] = [
+  "notice",
+  "warning",
+  "success",
+  "error",
+];
 
 function ToastPlayground() {
   const [message, setMessage] = useState("");
-  const [variant, setVariant] = useState(VARIANT_OPTIONS[0]);
+  const [variant, setVariant] = useState<VariantType>(VARIANT_OPTIONS[0]);
   const [showToast, setShowToast] = useState(false);
 
   return (
@@ -61,7 +67,7 @@ function ToastPlayground() {
                   name="variant"
                   value={`${option}`}
                   checked={variant === option}
-                  onChange={(e) => setVariant(e.target.value)}
+                  onChange={(e) => setVariant(e.target.value as VariantType)}
                 />
                 {option}
               </label>
