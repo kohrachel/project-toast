@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useId } from "react";
 import {
   AlertOctagon,
   AlertTriangle,
@@ -20,12 +20,14 @@ const ICONS_BY_VARIANT = {
 };
 
 export type ToastProps = {
+  id: string;
   children: string;
   variant: VariantType;
   setShowToast: Dispatch<SetStateAction<boolean>>;
 };
 
 function Toast({ variant, setShowToast, children }: ToastProps) {
+  const id = useId();
   const Icon = ICONS_BY_VARIANT[variant];
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
@@ -37,6 +39,7 @@ function Toast({ variant, setShowToast, children }: ToastProps) {
         className={styles.closeButton}
         onClick={() => {
           setShowToast(false);
+          dismissToast(id);
         }}
       >
         <X size={24} />
