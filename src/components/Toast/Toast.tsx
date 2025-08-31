@@ -19,20 +19,20 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-interface ToastProps {
+export type ToastProps = {
+  children: string;
   variant: VariantType;
-  message: string;
   setShowToast: Dispatch<SetStateAction<boolean>>;
-}
+};
 
-function Toast({ variant, message, setShowToast }: ToastProps) {
+function Toast({ variant, setShowToast, children }: ToastProps) {
   const Icon = ICONS_BY_VARIANT[variant];
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
       <div className={styles.iconContainer}>
         <Icon size={24} />
       </div>
-      <p className={styles.content}>{message}</p>
+      <p className={styles.content}>{children}</p>
       <button
         className={styles.closeButton}
         onClick={() => {
