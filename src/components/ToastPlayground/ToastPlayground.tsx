@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Button from "../Button";
 import Toast from "../Toast/Toast";
 import styles from "./ToastPlayground.module.css";
+import ToastShelf from "../ToastShelf/ToastShelf";
+import { ToastProps } from "../Toast/Toast";
 
 export type VariantType = "notice" | "warning" | "success" | "error";
 const VARIANT_OPTIONS: VariantType[] = [
@@ -16,6 +18,7 @@ function ToastPlayground() {
   const [message, setMessage] = useState("");
   const [variant, setVariant] = useState<VariantType>(VARIANT_OPTIONS[0]);
   const [showToast, setShowToast] = useState(false);
+  const [toastArray, setToastArray] = useState<ToastProps[]>([]);
 
   return (
     <div className={styles.wrapper}>
@@ -24,13 +27,7 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      {showToast && (
-        <Toast
-          message={message}
-          variant={variant}
-          setShowToast={setShowToast}
-        />
-      )}
+      <ToastShelf toastArray={toastArray} />
 
       <div className={styles.controlsWrapper}>
         <form
@@ -78,7 +75,21 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button onClick={() => setShowToast(true)}>Pop Toast!</Button>
+            <Button
+              onClick={() => {
+                setShowToast(true);
+                setToastArray((prev) => [
+                  ...prev,
+                  {
+                    children: message,
+                    variant: variant,
+                    setShowToast: setShowToast,
+                  },
+                ]);
+              }}
+            >
+              Pop Toast!
+            </Button>
             <p>message: {message}</p>
             <p>variant: {variant}</p>
             <p>showToast: {showToast}</p>
