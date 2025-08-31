@@ -9,9 +9,7 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 function ToastPlayground() {
   const [message, setMessage] = useState("");
   const [variant, setVariant] = useState(VARIANT_OPTIONS[0]);
-  const [showToast, setShowToast] = useState(true);
-
-  const dismissToast = () => {};
+  const [showToast, setShowToast] = useState(false);
 
   return (
     <div className={styles.wrapper}>
@@ -20,9 +18,13 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      {/* {showToast && ( */}
-      <Toast message={message} variant={variant} dismissToast={dismissToast} />
-      {/* )} */}
+      {showToast && (
+        <Toast
+          message={message}
+          variant={variant}
+          setShowToast={setShowToast}
+        />
+      )}
 
       <div className={styles.controlsWrapper}>
         <form
@@ -70,9 +72,10 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button>Pop Toast!</Button>
+            <Button onClick={() => setShowToast(true)}>Pop Toast!</Button>
             <p>message: {message}</p>
             <p>variant: {variant}</p>
+            <p>showToast: {showToast}</p>
           </div>
         </div>
       </div>
