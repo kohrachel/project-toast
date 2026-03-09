@@ -105,9 +105,6 @@ function ToastPlayground() {
             >
               Pop Toast!
             </Button>
-            <p>message: {message}</p>
-            <p>variant: {variant}</p>
-            <p>showToast: {showToast}</p>
           </div>
         </div>
       </div>

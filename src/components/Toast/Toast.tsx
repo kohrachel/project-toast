@@ -45,7 +45,6 @@ function Toast({
         className={styles.closeButton}
         onClick={() => {
           setShowToast(false);
-          console.log("delete toast");
           dismissToast(id);
         }}
       >
