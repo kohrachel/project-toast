@@ -24,10 +24,16 @@ export type ToastProps = {
   children: string;
   variant: VariantType;
   setShowToast: Dispatch<SetStateAction<boolean>>;
+  dismissToast: (id: string) => void;
 };
 
-function Toast({ variant, setShowToast, children }: ToastProps) {
-  const id = useId();
+function Toast({
+  id,
+  variant,
+  setShowToast,
+  children,
+  dismissToast,
+}: ToastProps) {
   const Icon = ICONS_BY_VARIANT[variant];
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
@@ -39,6 +45,7 @@ function Toast({ variant, setShowToast, children }: ToastProps) {
         className={styles.closeButton}
         onClick={() => {
           setShowToast(false);
+          console.log("delete toast");
           dismissToast(id);
         }}
       >

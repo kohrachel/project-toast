@@ -4,6 +4,7 @@ import Button from "../Button";
 import styles from "./ToastPlayground.module.css";
 import ToastShelf from "../ToastShelf/ToastShelf";
 import { ToastProps } from "../Toast/Toast";
+import Toast from "../Toast/Toast";
 
 export type VariantType = "notice" | "warning" | "success" | "error";
 const VARIANT_OPTIONS: VariantType[] = [
@@ -17,7 +18,13 @@ function ToastPlayground() {
   const [message, setMessage] = useState("");
   const [variant, setVariant] = useState<VariantType>(VARIANT_OPTIONS[0]);
   const [showToast, setShowToast] = useState(false);
-  const [toastArray, setToastArray] = useState<ToastProps[]>([]);
+  const [toastArray, setToastArray] = useState<React.JSX.Element[]>([]);
+
+  const dismissToast = (id: string) => {
+    setToastArray((prevToastArray) =>
+      prevToastArray.filter((toast) => toast.props.id !== id),
+    );
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -79,11 +86,14 @@ function ToastPlayground() {
                 setShowToast(true);
                 setToastArray((prev) => [
                   ...prev,
-                  {
-                    children: message,
-                    variant: variant,
-                    setShowToast: setShowToast,
-                  },
+                  <Toast
+                    id={crypto.randomUUID()}
+                    variant={variant}
+                    setShowToast={setShowToast}
+                    dismissToast={dismissToast}
+                  >
+                    {message}
+                  </Toast>,
                 ]);
               }}
             >
