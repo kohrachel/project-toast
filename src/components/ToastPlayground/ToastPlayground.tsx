@@ -55,6 +55,7 @@ function ToastPlayground() {
               id="message"
               className={styles.messageInput}
               onChange={(e) => setMessage(e.target.value)}
+              value={message}
             />
           </div>
         </form>
@@ -83,6 +84,9 @@ function ToastPlayground() {
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
             <Button
               onClick={() => {
+                if (message.trim() === "") {
+                  return;
+                }
                 setShowToast(true);
                 setToastArray((prev) => [
                   ...prev,
@@ -95,6 +99,8 @@ function ToastPlayground() {
                     {message}
                   </Toast>,
                 ]);
+                setMessage("");
+                setVariant(VARIANT_OPTIONS[0]);
               }}
             >
               Pop Toast!
